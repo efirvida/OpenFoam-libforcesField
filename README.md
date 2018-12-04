@@ -1,8 +1,7 @@
 # libForcesField
-==============
-Calculates the forces and moments by integrating the pressure and skin-friction forces over a given list of patches.
+Calculates the forces integrating the pressure and skin-friction forces over a given list of patches.
 
-Store and write volume field representations of forces and moments. Same as *writeFields yes;* option in [OpenFoam by ESI-Group](https://www.openfoam.com/documentation/cpp-guide/html/guide-fos-forces-forces.html) but only to write the fields. If you want the force log file you can combine it with the classic libforce function.
+Store and write volume field representations of forces. Same as *writeFields yes;* option in [OpenFoam by ESI-Group](https://www.openfoam.com/documentation/cpp-guide/html/guide-fos-forces-forces.html) but only to write the fields. If you want the force log file you can combine it with the classic libforce function.
 
 Example of function object specification:
 ```
