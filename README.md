@@ -20,13 +20,13 @@ forceField_1
 |patches      | Patches included in the forces calculation | yes |   |
 |p            | Pressure field name     | no          | p            |
 |U            | Velocity field name     | no          | U            |
-|rho          | Density field name (see below) | yes   | rho          |
+|rho          | Density field name (see below) | no   | rho          |
 |CofR         | Centre of rotation (see below) | no   |              |
 |directForceDensity | Force density supplied directly (see below)|no|no|
 |fD           | Name of force density field (see below) | no | fD     |
 
 Note:
-- For incompressible cases, set `rho` to `rhoInf`.  You will then be required to provide a `rhoInf` value corresponding to the free-stream constant density.
+- For incompressible cases, set `rho` in the "constant/transportProperties" dictionary.
 - If the force density is supplied directly, set the `directForceDensity` flag to `yes`, and supply the force density field using the `fDName` entry.
 
 ## Build it
