@@ -36,14 +36,14 @@ namespace Foam
 {
     namespace functionObjects
     {
-        defineTypeNameAndDebug(forces, 0);
-        addToRunTimeSelectionTable(functionObject, forces, dictionary);
+        defineTypeNameAndDebug(forcesFields, 0);
+        addToRunTimeSelectionTable(functionObject, forcesFields, dictionary);
     }
 }
 
 
 // * * * * * * * * * * * * Protected Member Functions  * * * * * * * * * * * //
-void Foam::functionObjects::forces::initialise()
+void Foam::functionObjects::forcesFields::initialise()
 {
     if (initialised_)
     {
@@ -80,7 +80,7 @@ void Foam::functionObjects::forces::initialise()
 }
 
 
-void Foam::functionObjects::forces::resetFields()
+void Foam::functionObjects::forcesFields::resetFields()
 {
     force_[0] = Zero;
     force_[1] = Zero;
@@ -96,7 +96,7 @@ void Foam::functionObjects::forces::resetFields()
 
 
 Foam::tmp<Foam::volSymmTensorField>
-Foam::functionObjects::forces::devRhoReff() const
+Foam::functionObjects::forcesFields::devRhoReff() const
 {
     typedef compressible::turbulenceModel cmpTurbModel;
     typedef incompressible::turbulenceModel icoTurbModel;
@@ -163,7 +163,7 @@ Foam::functionObjects::forces::devRhoReff() const
 }
 
 
-Foam::tmp<Foam::volScalarField> Foam::functionObjects::forces::mu() const
+Foam::tmp<Foam::volScalarField> Foam::functionObjects::forcesFields::mu() const
 {
     if (obr_.foundObject<fluidThermo>(basicThermo::dictName))
     {
@@ -207,7 +207,7 @@ Foam::tmp<Foam::volScalarField> Foam::functionObjects::forces::mu() const
 }
 
 
-Foam::tmp<Foam::volScalarField> Foam::functionObjects::forces::rho() const
+Foam::tmp<Foam::volScalarField> Foam::functionObjects::forcesFields::rho() const
 {
     if (rhoName_ == "rhoInf")
     {
@@ -233,7 +233,7 @@ Foam::tmp<Foam::volScalarField> Foam::functionObjects::forces::rho() const
 }
 
 
-Foam::scalar Foam::functionObjects::forces::rho(const volScalarField& p) const
+Foam::scalar Foam::functionObjects::forcesFields::rho(const volScalarField& p) const
 {
     if (p.dimensions() == dimPressure)
     {
@@ -253,7 +253,7 @@ Foam::scalar Foam::functionObjects::forces::rho(const volScalarField& p) const
 }
 
 
-void Foam::functionObjects::forces::addToFields(
+void Foam::functionObjects::forcesFields::addToFields(
     const label patchi,
     const vectorField &fN,
     const vectorField &fT,
@@ -268,7 +268,7 @@ void Foam::functionObjects::forces::addToFields(
 }
 
 
-void Foam::functionObjects::forces::addToFields(
+void Foam::functionObjects::forcesFields::addToFields(
     const labelList &cellIDs,
     const vectorField &fN,
     const vectorField &fT,
@@ -287,7 +287,7 @@ void Foam::functionObjects::forces::addToFields(
 
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
-Foam::functionObjects::forces::forces(
+Foam::functionObjects::forcesFields::forcesFields(
     const word &name,
     const Time &runTime,
     const dictionary &dict,
@@ -311,8 +311,7 @@ Foam::functionObjects::forces::forces(
     }
 }
 
-
-Foam::functionObjects::forces::forces(
+Foam::functionObjects::forcesFields::forcesFields(
     const word &name,
     const objectRegistry &obr,
     const dictionary &dict,
@@ -338,12 +337,12 @@ Foam::functionObjects::forces::forces(
 
 
 // * * * * * * * * * * * * * * * * Destructor  * * * * * * * * * * * * * * * //
-Foam::functionObjects::forces::~forces()
+Foam::functionObjects::forcesFields::~forcesFields()
 {}
 
 
 // * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
-void Foam::functionObjects::forces::calcForcesMoment()
+void Foam::functionObjects::forcesFields::calcForcesMoment()
 {
     initialise();
     resetFields();
@@ -448,7 +447,7 @@ void Foam::functionObjects::forces::calcForcesMoment()
 }
 
 
-bool Foam::functionObjects::forces::read(const dictionary &dict)
+bool Foam::functionObjects::forcesFields::read(const dictionary &dict)
 {
     fvMeshFunctionObject::read(dict);
 
@@ -520,7 +519,7 @@ bool Foam::functionObjects::forces::read(const dictionary &dict)
 }
 
 
-bool Foam::functionObjects::forces::write()
+bool Foam::functionObjects::forcesFields::write()
 {
     calcForcesMoment();
 
@@ -530,7 +529,7 @@ bool Foam::functionObjects::forces::write()
 }
 
 
-bool Foam::functionObjects::forces::execute()
+bool Foam::functionObjects::forcesFields::execute()
 {
     return true;
 }

@@ -101,7 +101,7 @@ namespace Foam
                                 Class forces Declaration
         \*---------------------------------------------------------------------------*/
 
-        class forces: public fvMeshFunctionObject
+        class forcesFields: public fvMeshFunctionObject
         {
             protected:
 
@@ -177,12 +177,6 @@ namespace Foam
                     const vectorField &fT,
                     const vectorField &fP);
 
-                //- Disallow default bitwise copy construct
-                forces(const forces &);
-
-                //- Disallow default bitwise assignment
-                void operator=(const forces &);
-
             public:
                 //- Runtime type information
                 TypeName("forcesField");
@@ -190,21 +184,21 @@ namespace Foam
                 // Constructors
 
                 //- Construct from Time and dictionary
-                forces(
+                forcesFields(
                     const word &name,
                     const Time &runTime,
                     const dictionary &dict,
                     const bool readFields = true);
 
                 //- Construct from objectRegistry and dictionary
-                forces(
+                forcesFields(
                     const word &name,
                     const objectRegistry &obr,
                     const dictionary &dict,
                     const bool readFields = true);
 
                 //- Destructor
-                virtual ~forces();
+                virtual ~forcesFields();
 
                 //- Read the forces data
                 virtual bool read(const dictionary &);
