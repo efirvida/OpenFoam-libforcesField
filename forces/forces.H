@@ -25,11 +25,11 @@ Class
     Foam::functionObjects::forces
 
 Description
-    Calculates the forces and moments by integrating the pressure and
+    Calculates the forces by integrating the pressure and
     skin-friction forces over a given list of patches.
 
     Member function forces::write() store and write volume field 
-    representations of forces and moments.
+    representations of forces.
 
     Example of function object specification:
     \verbatim
@@ -56,27 +56,12 @@ Usage
     \endtable
 
 Note
-  - For incompressible cases, set \c rho to \c rhoInf.  You will then be
-    required to provide a \c rhoInf value corresponding to the free-stream
-    constant density.
+  - For incompressible cases, set \c rho in the \c "constant/transportProperties"
+    dictionary.
   - If the force density is supplied directly, set the \c directForceDensity
     flag to 'yes', and supply the force density field using the \c
     fDName entry
-  - The centre of rotation (CofR) for moment calculations can either be
-    specified by an \c CofR entry, or be taken from origin of the local
-    coordinate system.  For example,
-    \verbatim
-        CofR        (0 0 0);
-    \endverbatim
-    or
-    \verbatim
-        coordinateSystem
-        {
-            origin  (0 0 0);
-            e3      (0 0 1);
-            e1      (1 0 0);
-        }
-    \endverbatim
+
 
 SourceFiles
     forces.C
