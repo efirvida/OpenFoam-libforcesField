@@ -1,4 +1,4 @@
-libForcesField
+# libForcesField
 ==============
 Calculates the forces and moments by integrating the pressure and skin-friction forces over a given list of patches.
 
@@ -29,20 +29,6 @@ forceField_1
 Note:
 - For incompressible cases, set `rho` to `rhoInf`.  You will then be required to provide a `rhoInf` value corresponding to the free-stream constant density.
 - If the force density is supplied directly, set the `directForceDensity` flag to `yes`, and supply the force density field using the `fDName` entry.
-- The centre of rotation (`CofR`) for moment calculations can either be specified by an `CofR` entry, or be taken from origin of the local coordinate system. For example:
 
-```
-    CofR        (0 0 0);
-```
-
-or
-
-```
-    origin  (0 0 0);
-    coordinateRotation
-    {
-        type    axesRotation;
-        e1  (1 0 0);
-        e2  (0 1 0);
-    } 
-```
+## Build it
+use `wmake` to compile and install it.
