@@ -61,23 +61,14 @@ void Foam::functionObjects::forces::initialise()
     }
     else
     {
-        if
-        (
-            !obr_.foundObject<volVectorField>(UName_)
-         || !obr_.foundObject<volScalarField>(pName_)
-
-        )
+        if (!obr_.foundObject<volVectorField>(UName_) || !obr_.foundObject<volScalarField>(pName_))
         {
             FatalErrorInFunction
                 << "Could not find " << UName_ << ", " << pName_
                 << exit(FatalError);
         }
 
-        if
-        (
-            rhoName_ != "rhoInf"
-         && !obr_.foundObject<volScalarField>(rhoName_)
-        )
+        if (rhoName_ != "rhoInf" && !obr_.foundObject<volScalarField>(rhoName_))
         {
             FatalErrorInFunction
                 << "Could not find " << rhoName_
@@ -483,10 +474,17 @@ bool Foam::functionObjects::forces::read(const dictionary &dict)
         UName_ = dict.lookupOrDefault<word>("U", "U");
         rhoName_ = dict.lookupOrDefault<word>("rho", "rho");
 
-        // Reference density needed for incompressible calculations
-        if (rhoName_ == "rhoInf")
+        // Reference density needed for incompressible
+        if (obr_.foundObject<transportModel>("transportProperties"))
         {
-            dict.lookup("rhoInf") >> rhoRef_;
+            rhoName_ = "rhoInf";
+            const dictionary &transportProperties =
+                obr_.lookupObject<dictionary>("transportProperties");
+
+            dimensionedScalar rhoRef_(
+                "rho",
+                dimDensity,
+                transportProperties.lookup("rho"));
         }
 
         // Reference pressure, 0 by default
