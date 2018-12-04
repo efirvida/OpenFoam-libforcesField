@@ -21,7 +21,7 @@ forceField_1
 |patches      | Patches included in the forces calculation | yes |   |
 |p            | Pressure field name     | no          | p            |
 |U            | Velocity field name     | no          | U            |
-|rho          | Density field name (see below) | no   | rho          |
+|rho          | Density field name (see below) | yes   | rho          |
 |CofR         | Centre of rotation (see below) | no   |              |
 |directForceDensity | Force density supplied directly (see below)|no|no|
 |fD           | Name of force density field (see below) | no | fD     |
