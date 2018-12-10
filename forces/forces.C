@@ -480,10 +480,7 @@ bool Foam::functionObjects::forcesFields::read(const dictionary &dict)
             const dictionary &transportProperties =
                 obr_.lookupObject<dictionary>("transportProperties");
 
-            dimensionedScalar rhoRef_(
-                "rho",
-                dimDensity,
-                transportProperties.lookup("rho"));
+            transportProperties.lookup("rho") >> rhoRef_;
         }
 
         // Reference pressure, 0 by default
